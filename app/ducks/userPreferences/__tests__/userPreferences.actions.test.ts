@@ -1,5 +1,3 @@
-import { ElectricityEnum } from "carbon-footprint";
-
 import userPreferences from "../";
 
 describe("userPreferences actions should", () => {
@@ -7,34 +5,17 @@ describe("userPreferences actions should", () => {
     expect(userPreferences.actions).toMatchSnapshot());
 
   it("be able to update to a new term of use version", () => {
-    const acceptedTermsOfUseVersion = 2;
+    const username = "username";
+    const password = "password";
+    const serverAddress = "http://192.168.1.111";
 
     const expectedAction = {
-      type: userPreferences.actions.acceptTermsOfUse.toString(),
-      payload: acceptedTermsOfUseVersion,
+      type: userPreferences.actions.userLoggedIn.toString(),
+      payload: {username, password, serverAddress},
     };
     expect(
-      userPreferences.actions.acceptTermsOfUse(acceptedTermsOfUseVersion)
+      userPreferences.actions.userLoggedIn({username, password, serverAddress})
     ).toEqual(expectedAction);
   });
 
-  it("be able to update to update user location", () => {
-    const expectedAction = {
-      type: userPreferences.actions.updateLocation.toString(),
-      payload: ElectricityEnum.france,
-    };
-    expect(
-      userPreferences.actions.updateLocation(ElectricityEnum.france)
-    ).toEqual(expectedAction);
-  });
-
-  it("be able to update to update notifications", () => {
-    const expectedAction = {
-      type: userPreferences.actions.toggleNotifications.toString(),
-      payload: true,
-    };
-    expect(userPreferences.actions.toggleNotifications(true)).toEqual(
-      expectedAction
-    );
-  });
 });

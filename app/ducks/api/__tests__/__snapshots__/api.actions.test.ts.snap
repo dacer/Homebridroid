@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Api actions should export expected actions 1`] = `
+Object {
+  "getDevices": [Function],
+  "login": [Function],
+  "logout": [Function],
+}
+`;

@@ -1,56 +1,29 @@
-import { ElectricityEnum } from "carbon-footprint";
-
 import userPreferences from "../";
 
 describe("userPreferences reducer should", () => {
   it("return the initial state", () => {
-    // TODO: fix eslint complains bellow
-    // eslint-disable-next-line
     expect(userPreferences.reducer(undefined, {} as any)).toEqual({
-      acceptedTermsOfUseVersion: 0,
-      activatedNotifications: false,
-      location: ElectricityEnum.world,
+      username: "",
+      password: "",
+      serverAddress: "",
     });
   });
 
-  it("handle a monthly userPreferences change", () => {
-    const acceptedTermsOfUseVersion = 2;
+  it("handle a userPreferences change", () => {
+    const username = "username";
+    const password = "password";
+    const serverAddress = "http://192.168.1.111";
 
     const expectedAction = {
-      type: userPreferences.actions.acceptTermsOfUse.toString(),
-      payload: acceptedTermsOfUseVersion,
+      type: userPreferences.actions.userLoggedIn.toString(),
+      payload: {username, password, serverAddress},
     };
 
     expect(userPreferences.reducer(undefined, expectedAction)).toEqual({
-      acceptedTermsOfUseVersion: 2,
-      activatedNotifications: false,
-      location: ElectricityEnum.world,
+      username: "username",
+      password: "password",
+      serverAddress: "http://192.168.1.111",
     });
   });
 
-  it("handle location change", () => {
-    const expectedAction = {
-      type: userPreferences.actions.updateLocation.toString(),
-      payload: ElectricityEnum.belgium,
-    };
-
-    expect(userPreferences.reducer(undefined, expectedAction)).toEqual({
-      acceptedTermsOfUseVersion: 0,
-      activatedNotifications: false,
-      location: ElectricityEnum.belgium,
-    });
-  });
-
-  it("handle notification change", () => {
-    const expectedAction = {
-      type: userPreferences.actions.toggleNotifications.toString(),
-      payload: true,
-    };
-
-    expect(userPreferences.reducer(undefined, expectedAction)).toEqual({
-      acceptedTermsOfUseVersion: 0,
-      activatedNotifications: true,
-      location: ElectricityEnum.world,
-    });
-  });
 });

@@ -1,13 +1,11 @@
-import { ElectricityEnum } from "carbon-footprint";
-
 import userPreferences from "../";
 
-let state;
+let state = {};
 
 const initialState = {
-  acceptedTermsOfUseVersion: 3,
-  activatedNotifications: false,
-  location: ElectricityEnum.world,
+  username: "username", 
+  password: "password", 
+  serverAddress: "http://192.1.1.111",
 };
 
 describe("userPreferences selector should", () => {
@@ -19,16 +17,7 @@ describe("userPreferences selector should", () => {
 
   test("return the monthly userPreferences", () =>
     expect(
-      userPreferences.selectors.getAcceptedTermsOfUseVersion(state)
-    ).toEqual(initialState.acceptedTermsOfUseVersion));
+      userPreferences.selectors.getServerAddress(state)
+    ).toEqual(initialState.serverAddress));
 
-  test("return user location", () =>
-    expect(userPreferences.selectors.getLocation(state)).toEqual(
-      initialState.location
-    ));
-
-  test("return notification status", () =>
-    expect(userPreferences.selectors.getActivateNotifications(state)).toEqual(
-      initialState.activatedNotifications
-    ));
 });
